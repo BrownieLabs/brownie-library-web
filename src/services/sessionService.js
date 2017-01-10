@@ -3,7 +3,8 @@ import * as localForage from 'localforage';
 
 export const loadSession = () => {
   return localForage.getItem(constant.USER_SESSION)
-  .then(value => value);
+  .then(value => value)
+  .catch(err => err);
 };
 
 export const saveSession = (session) => {
@@ -41,7 +42,7 @@ export const isLogged = () => {
       if (currentSession && currentSession.token) {
         resolve(currentSession);
       } else {
-        reject('nope');
+        reject();
       }
     });
   });
